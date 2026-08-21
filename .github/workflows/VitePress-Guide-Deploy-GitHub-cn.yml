@@ -1,6 +1,6 @@
 # VitePress-Guide-Deploy-GitHub-cn.yml
 # github.com/shenjuexiao
-# 20260820
+# 20260821
 
 # vitepress.dev/zh/guide/deploy
 # 部署 VitePress 站点
@@ -56,7 +56,7 @@ jobs:
         with:
           node-version: 24
           # npm / pnpm / yarn
-          cache: npm
+          cache: pnpm
 
       - name: Cache VitePress
         uses: actions/cache@v4
@@ -71,11 +71,11 @@ jobs:
       
       - name: Install dependencies
         # npm ci / pnpm install / yarn install / bun install
-        run: npm ci
+        run: pnpm install
         
       - name: Build with VitePress
         # npm run docs:build / pnpm docs:build / yarn docs:build / bun run docs:build
-        run: npm run docs:build
+        run: pnpm run docs:build
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
