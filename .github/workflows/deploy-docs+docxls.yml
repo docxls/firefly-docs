@@ -1,11 +1,11 @@
-# deploy+docxls.yml
+# deploy-docs+docxls.yml
 # github.com/shenjuexiao
 # 20260820
 
 # github.com/CuteLeaf/Firefly
 # github.com/CuteLeaf/Firefly/blob/master/.github/workflows/deploy.yml
 
-# .github/workflows/deploy+docxls.yml
+# .github/workflows/deploy-docs+docxls.yml
 name: Deploy to GitHub Pages
 
 on:
@@ -44,6 +44,14 @@ jobs:
           version: 11.22.0
           run_install: false
           
+      # 20260821
+      # pnpm 默认会阻止依赖包在安装时执行构建脚本（build scripts）
+      # esbuild 需要执行构建脚本才能正常工作
+      # 关键修复：允许构建脚本
+      - name: Configure pnpm for CI
+        run: |
+          pnpm config set ignore-scripts false
+         
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
       
