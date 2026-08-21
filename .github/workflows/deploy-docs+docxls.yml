@@ -47,9 +47,13 @@ jobs:
       # 20260821
       # pnpm 默认会阻止依赖包在安装时执行构建脚本（build scripts）
       # esbuild 需要执行构建脚本才能正常工作
-      - name: Install dependencies
+      # - name: Install dependencies
         # run: pnpm install --no-frozen-lockfile
-        run: pnpm install --no-frozen-lockfile --ignore-scripts=false
+      - name: Install dependencies
+        run: |
+          pnpm install --no-frozen-lockfile || true
+          echo "y" | pnpm approve-builds
+          pnpm install --no-frozen-lockfile
       
       - name: Build site
         run: pnpm run build
